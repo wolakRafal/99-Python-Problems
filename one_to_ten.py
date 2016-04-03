@@ -20,7 +20,7 @@ def findKth(l, k):
 
 # P04 (*) Find the number of elements of a list.
 def size(l):
-    'Find the number of elements of a list.'
+    """Find the number of elements of a list."""
     return len(l)
 
 
@@ -39,14 +39,60 @@ def palindrome(l):
 # * (my-flatten '(a (b (c d) e)))
 # (A B C D E)
 # Hint: Use the predefined functions list and append.
+import collections
+
+
+def flat(iterable, x):
+    if isinstance(x, collections.Iterable):
+        iterable.extend(flatten(x))
+    else:
+        iterable.append(x)
+
+    return iterable
+
+
+def flatten(l):
+    return reduce(flat, l, [])
 
 
 #     P08 (**) Eliminate consecutive duplicates of list elements.
-#     If a list contains repeated elements they should be replaced with a single copy of the element. The order of the elements should not be changed.
+#     If a list contains repeated elements they should be replaced with a single copy of the element.
+#       The order of the elements should not be changed.
 #
 # Example:
 #     * (compress '(a a a a b c c a a d e e e e))
 # (A B C A D E)
+
+
+def comp_rec(c, acc, l):
+    if not l:
+        return acc
+    else:
+        if c == l[0]:
+            return comp_rec(c, acc, l[1:])
+        else:
+            head = l.pop(0)
+            return comp_rec(head, acc + [head], l)
+
+
+def compress(l):
+    head = l.pop(0)
+    return comp_rec(head, [head], l)
+
+
+def comp_reduce(acc, elem):
+    if not acc:
+        return acc + [elem]
+    else:
+        if acc[-1] == elem:
+            return acc
+        else:
+            return acc + [elem]
+
+
+def compress_2(l):
+    return reduce(comp_reduce, l, [])
+
 
 # P09 (**) Pack consecutive duplicates of list elements into sublists.
 #     If a list contains repeated elements they should be placed in separate sublists.
