@@ -7,17 +7,21 @@
 
 
 def count(acc, x):
-    """If symbol x exists in acc increase counter, otherwise add new tuple.
+    """If symbol x exists in acc on last position increase counter, otherwise add new tuple.
 
         Returns list of pairs: (symbol counter, symbol)"""
 
     def containSymbol(l, symbol):
-        return len(filter(lambda t: symbol == t[1], l)) == 0
+        return l[-1][1] == symbol if l else False
 
-    def increaseCounter(a):
-        return (a[0] + 1, a[1]) if a[1] == x else a
+    def increaseCounter(l):
+        """Increase counter on last element of the list,
+        Returns modified list"""
+        a = l[-1]
+        l[-1] = (a[0] + 1, a[1])
+        return l
 
-    return acc + [(1, x)] if containSymbol(acc, x) else map(increaseCounter, acc)
+    return acc + [(1, x)] if not containSymbol(acc, x) else increaseCounter(acc)
 
 
 def encode(s):
