@@ -5,10 +5,11 @@
 # (A B C D E)
 # Hint: Use the predefined functions list and append.
 import collections
+import test_utils
 
 
 def flat(iterable, x):
-    if isinstance(x, collections.Iterable):
+    if isinstance(x, collections.Iterable) and not isinstance(x, basestring):
         iterable.extend(flatten(x))
     else:
         iterable.append(x)
@@ -22,5 +23,7 @@ def flatten(l):
 
 if __name__ == "__main__":
     test_list = [1, [2, [3]], [[[[4, 5]]]]]
-    print test_list
-    print flatten(test_list)
+    expected = [1, 2, 3, 4, 5]
+    test_utils.test(flatten, test_list, expected)
+
+    test_utils.test(flatten, [[1, 1], [2, 2], [3, 3]], [1, 1, 2, 2, 3, 3])
