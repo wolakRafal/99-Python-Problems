@@ -24,6 +24,6 @@ def flatten(l):
 if __name__ == "__main__":
     test_list = [1, [2, [3]], [[[[4, 5]]]]]
     expected = [1, 2, 3, 4, 5]
-    test_utils.test(flatten, test_list, expected)
+    test_utils.unit_test(flatten, expected, test_list)
 
-    test_utils.test(flatten, [[1, 1], [2, 2], [3, 3]], [1, 1, 2, 2, 3, 3])
+    test_utils.unit_test(flatten, [1, 1, 2, 2, 3, 3], [[1, 1], [2, 2], [3, 3]])

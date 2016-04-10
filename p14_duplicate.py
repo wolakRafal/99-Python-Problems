@@ -12,4 +12,4 @@ def dupli(l):
 if __name__ == '__main__':
     test_data = ['a', 'b', 'c', 'c', 'd']
     expected = ['a', 'a', 'b', 'b', 'c', 'c', 'c', 'c', 'd', 'd']
-    test_utils.test(dupli, test_data, expected)
+    test_utils.unit_test(dupli, expected, test_data)
