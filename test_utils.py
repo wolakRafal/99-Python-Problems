@@ -13,5 +13,7 @@ def _call_fun(fun, args):
         return fun(args[0])
     elif len(args) == 2:
         return fun(args[0], args[1])
+    elif len(args) == 3:
+        return fun(args[0], args[1], args[2])
     else:
         return fun()
